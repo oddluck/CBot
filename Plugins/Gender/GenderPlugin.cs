@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -351,9 +351,9 @@ namespace GenderManager {
 			}
 		}
 
-		public override bool OnChannelJoin(object sender, ChannelJoinEventArgs e) {
+		public override bool OnChannelJoinAsync(object sender, ChannelJoinEventArgs e) {
 			RecheckUser(e.Sender);
-            return base.OnChannelJoin(sender, e);
+            return base.OnChannelJoinAsync(sender, e);
         }
 
         public override bool OnWhoList(object sender, WhoListEventArgs e) {
