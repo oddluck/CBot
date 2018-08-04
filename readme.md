@@ -1,3 +1,5 @@
+https://github.com/AndrioCelos/CBot ported to .NET Core 2.1 so it is now multiplatform and runs under Linux.
+
 CBot
 ====
 
