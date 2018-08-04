@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -54,7 +54,7 @@ namespace HelpCommand {
 		private async Task<bool> showCommandInfo(IrcMessageTarget target, IrcUser user, string message) {
             if (!Bot.IsCommand(target, message, false, out var pluginKey, out var label, out var prefix, out var parameters)) return false;
 
-            var result = await Bot.GetCommand(user, target, pluginKey, label, parameters);
+            var result = Bot.GetCommand(user, target, pluginKey, label, parameters);
 			if (result == null) return false;
 			var command = result.Value.command;
 
