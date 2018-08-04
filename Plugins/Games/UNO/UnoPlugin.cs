@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -1596,9 +1596,9 @@ namespace UNO {
             return base.OnNicknameChange(sender, e);
         }
 
-        public override bool OnChannelJoin(object sender, ChannelJoinEventArgs e) {
+        public override bool OnChannelJoinAsync(object sender, ChannelJoinEventArgs e) {
             if (e.Sender.Nickname == ((IrcClient) sender).Me.Nickname) this.StartResetTimer();
-            return base.OnChannelJoin(sender, e);
+            return base.OnChannelJoinAsync(sender, e);
         }
 
         public override bool OnChannelLeave(object sender, ChannelPartEventArgs e) {
