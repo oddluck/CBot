@@ -1,6 +1,6 @@
 [submodule "AnIRC"]
 	path = AnIRC
-	url = https://github.com/AndrioCelos/AnIRC.git
+	url = https://github.com/oddluck/AnIRC.git
 [submodule "References/RandomOrgJson-RPC"]
 	path = References/RandomOrgJson-RPC
-	url = https://github.com/AndrioCelos/RandomOrgJson-RPC
+	url = https://github.com/oddluck/RandomOrgJson-RPC
