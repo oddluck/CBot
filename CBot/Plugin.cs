@@ -65,7 +65,7 @@ namespace CBot {
         /// When an entry is not found in the Language list, the function should fall back to this list.
         /// </summary>
         protected Dictionary<string, string> defaultLanguage = new Dictionary<string, string>();
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         /// <summary>
         /// Creates a new instance of the Plugin class.
@@ -139,15 +139,17 @@ namespace CBot {
             return false;
         }
 
-        public virtual async Task<IEnumerable<Command>> CheckCommands(IrcUser sender, IrcMessageTarget target, string label, string parameters, bool isGlobalCommand) {
-			var command = this.GetCommand(target, label, isGlobalCommand);
-			if (command != null) {
-				return new[] { command };
+        public virtual IEnumerable<Command> CheckCommands(IrcUser sender, IrcMessageTarget target, string label, string parameters, bool isGlobalCommand)
+        {
+            var command = this.GetCommand(target, label, isGlobalCommand);
+            if (command != null)
+            {
+                return new[] { command };
             }
-			return Enumerable.Empty<Command>();
+            return Enumerable.Empty<Command>();
         }
 
-		public virtual async Task<bool> CheckTriggers(IrcUser sender, IrcMessageTarget target, string message) {
+        public virtual async Task<bool> CheckTriggers(IrcUser sender, IrcMessageTarget target, string message) {
 			if (this.Triggers.Count != 0) {
 				var trigger = this.GetTrigger(target, message, out Match match);
 				if (trigger != null) {
@@ -163,11 +165,10 @@ namespace CBot {
 		/// <summary>Returns the command that matches the specified label and target, if any; otherwise, returns null.</summary>
 		public Command GetCommand(IrcMessageTarget target, string label, bool globalCommand) {
 			string alias = label.Split(new char[] { ' ' })[0];
-			Command command;
-			if (!this.Commands.TryGetValue(alias, out command)) return null;
+            if (!this.Commands.TryGetValue(alias, out Command command)) return null;
 
-			// Check the scope.
-			if ((command.Attribute.Scope & CommandScope.PM) == 0 && !(target is IrcChannel)) return null;
+            // Check the scope.
+            if ((command.Attribute.Scope & CommandScope.PM) == 0 && !(target is IrcChannel)) return null;
 			if ((command.Attribute.Scope & CommandScope.Channel) == 0 && target is IrcChannel) return null;
 
 			return command;
@@ -400,8 +401,7 @@ namespace CBot {
         /// <param name="args">Implementation-defined elements to be included in the formatted message.</param>
         /// <returns>The formatted message, or null if the key given is not in either Language list.</returns>
         public string GetMessage(string key, string nickname, string channel, params object[] args) {
-            string format;
-            if (!this.language.TryGetValue(key, out format))
+            if (!this.language.TryGetValue(key, out string format))
                 if (!this.defaultLanguage.TryGetValue(key, out format))
                     return null;
 
@@ -623,7 +623,7 @@ namespace CBot {
         /// <summary>When overridden, handles the ChannelInviteExemptRemoved event. Return true to stop further processing of the event.</summary>
         public virtual bool OnChannelInviteExemptRemoved(object sender, ChannelListChangedEventArgs e) => false;
         /// <summary>When overridden, handles the ChannelJoin event. Return true to stop further processing of the event.</summary>
-        public virtual bool OnChannelJoin(object sender, ChannelJoinEventArgs e) => false;
+        public virtual bool OnChannelJoinAsync(object sender, ChannelJoinEventArgs e) => false;
         /// <summary>When overridden, handles the ChannelJoinDenied event. Return true to stop further processing of the event.</summary>
         public virtual bool OnChannelJoinDenied(object sender, ChannelJoinDeniedEventArgs e) => false;
         /// <summary>When overridden, handles the ChannelKeyRemoved event. Return true to stop further processing of the event.</summary>
