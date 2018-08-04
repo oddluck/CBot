@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -154,12 +154,12 @@ namespace BattleArenaManager {
             } catch (ThreadAbortException) { }
         }
 
-        public override bool OnChannelJoin(object sender, ChannelJoinEventArgs e) {
+        public override bool OnChannelJoinAsync(object sender, ChannelJoinEventArgs e) {
             if (e.Sender.Nickname == ((IrcClient) sender).Me.Nickname) {
                 BattleOff = false;
                 if (this.ArenaConnection == null) this.CheckChannels();
             }
-            return base.OnChannelJoin(sender, e);
+            return base.OnChannelJoinAsync(sender, e);
         }
 
         public void LoadConfig() {
