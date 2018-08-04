@@ -1,4 +1,5 @@
 https://github.com/AndrioCelos/CBot ported to .NET Core 2.1 so it is now multiplatform and runs under Linux.
+Requires Newtonsoft.Json https://www.nuget.org/packages/Newtonsoft.Json/
 
 CBot
 ====
