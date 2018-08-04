@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -421,7 +421,7 @@ namespace FAQ {
             return false;
         }
 
-        public override bool OnChannelJoin(object sender, ChannelJoinEventArgs e) {
+        public override bool OnChannelJoinAsync(object sender, ChannelJoinEventArgs e) {
             if (!IsActiveChannel(e.Channel)) return false;
             this.ExpressionCheckAsync((IrcClient) sender, e.Channel.Name, e.Sender, "JOIN", null);
             return false;
