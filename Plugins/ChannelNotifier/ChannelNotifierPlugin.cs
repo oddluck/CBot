@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
@@ -102,10 +102,10 @@ namespace ChannelNotifier {
             }
         }
 
-        public override bool OnChannelJoin(object sender, ChannelJoinEventArgs e) {
+        public override bool OnChannelJoinAsync(object sender, ChannelJoinEventArgs e) {
             if (!IsActiveChannel(e.Channel)) return false;
             this.SendCheck(string.Format("\u000315[\u000F{0}\u000315/\u000F{1}\u000315] {2}{3}\u000F joined.", e.Channel, (sender as IrcClient).NetworkName, Colours.NicknameColour(e.Sender.Nickname), e.Sender.Nickname), (IrcClient) sender, e.Channel);
-            return base.OnChannelJoin(sender, e);
+            return base.OnChannelJoinAsync(sender, e);
         }
 
         public override bool OnChannelLeave(object sender, ChannelPartEventArgs e) {
